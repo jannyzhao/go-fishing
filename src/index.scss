@@ -1,0 +1,14 @@
+  #gameBox {
+      border: 2px solid rgb(4, 62, 96);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1000px;
+      height: 600px;
+  }
+
+  body {
+      background-image: -webkit-linear-gradient(top, lightblue, rgb(43, 100, 165));
+      height: 100vh;
+  }
