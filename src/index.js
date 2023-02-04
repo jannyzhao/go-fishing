@@ -10,9 +10,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const game = new Game(canvas);
     game.start();
-
-    // console.log(game)
-    // console.log(ctx)
-    // console.log(fish)
-    
 });
