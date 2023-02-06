@@ -9,7 +9,18 @@ export default class Game {
         this.ctx = canvas.getContext("2d");
         this.dimensions = { width: canvas.width, height: canvas.height };
         this.canvas = canvas;
-        this.hook = new Hook(canvas.width / 2, 0, 0, 3, "black")
+        this.hook = new Hook(canvas.width / 2, 0, 0, 5, "black", canvas.height)
+        // Using keydown
+        document.addEventListener("keydown", e => {
+            if (e.code === "Space") {
+                this.hook.directionY = 5; // 5 is the speed, should match directionY
+            }
+        });
+        // Using click
+        // document.addEventListener("click", event => {
+        //     this.hook.directionY = 5;
+        // });
+         
         this.fishes = [];
     }
 
@@ -25,7 +36,7 @@ export default class Game {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
         this.drawFishes();
         this.fishes.forEach(fish => fish.update());
-        // this.drawHook();
+        this.drawHook();
         this.hook.update();
         requestAnimationFrame(() => this.animate());
     }
@@ -39,6 +50,10 @@ export default class Game {
     getRandomElement(array) {
         const randomIndex = Math.floor(Math.random() * arr.length);
         return arr[randomIndex];
+    }
+
+    moveHook() {
+
     }
 
     loadFish() {
