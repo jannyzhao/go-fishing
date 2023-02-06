@@ -20,5 +20,7 @@ export default class Hook {
     update() {
         this.x += this.directionX;
         this.y += this.directionY;
+
+        
     }
 }

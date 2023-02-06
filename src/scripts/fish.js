@@ -1,28 +1,25 @@
+const SPACESHIP_LEFT = new Image();
+SPACESHIP_LEFT.src = "./assets/spaceship-left.png"
 
-const spaceshipImage = new Image();
-spaceshipImage.src = "./assets/spaceship02.png"
+const SPACESHIP_RIGHT = new Image();
+SPACESHIP_RIGHT.src = "./assets/spaceship-right.png"
 
 export default class Fish {
-    constructor(x, y, dx, dy, radius, color) {
+    constructor({x, y, dx, dy, size}) {
         this.x = x;
         this.y = y;
         this.directionX = dx;
         this.directionY = dy;
-        this.radius = radius;
-        this.color = color;
+        this.size = size;
     }
 
     draw(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        // ctx.fill();
-        ctx.drawImage(spaceshipImage, this.x, this.y, this.radius, this.radius);
-        ctx.closePath();
+        const image = this.directionX < 0 ? SPACESHIP_LEFT : SPACESHIP_RIGHT
+        ctx.drawImage(image, this.x, this.y, this.size, this.size)
     }
     
     update() {
         this.x += this.directionX;
-        this.y += this.directionY; //this line will make the fix go diagonally
+        this.y += this.directionY; 
     }
 }
