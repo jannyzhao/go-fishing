@@ -1,3 +1,7 @@
+
+const spaceshipImage = new Image();
+spaceshipImage.src = "./assets/spaceship02.png"
+
 export default class Fish {
     constructor(x, y, dx, dy, radius, color) {
         this.x = x;
@@ -9,18 +13,14 @@ export default class Fish {
     }
 
     draw(ctx) {
-        // const img = new Image ();
-        // img.onload = () => {
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        ctx.fill();
+        // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        // ctx.fill();
+        ctx.drawImage(spaceshipImage, this.x, this.y, this.radius, this.radius);
         ctx.closePath();
-        // };
-        // img.src = "./assets/ufo.png"
-
     }
-
+    
     update() {
         this.x += this.directionX;
         this.y += this.directionY; //this line will make the fix go diagonally

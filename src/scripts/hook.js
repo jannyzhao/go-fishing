@@ -8,9 +8,9 @@ export default class Hook {
     }
 
     draw(ctx) {
+        ctx.beginPath();
         ctx.strokeStyle = this.color;
         ctx.lineWidth = 2;
-        ctx.beginPath();
         ctx.moveTo(this.x, 0);
         ctx.lineTo(this.x, this.y);
         ctx.stroke();
