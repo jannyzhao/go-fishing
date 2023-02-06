@@ -1,8 +1,8 @@
-const SPACESHIP_LEFT = new Image();
-SPACESHIP_LEFT.src = "./assets/spaceship-left.png"
+const FISH_LEFT = new Image();
+FISH_LEFT.src = "./assets/spaceship-left.png"
 
-const SPACESHIP_RIGHT = new Image();
-SPACESHIP_RIGHT.src = "./assets/spaceship-right.png"
+const FISH_RIGHT = new Image();
+FISH_RIGHT.src = "./assets/spaceship-right.png"
 
 export default class Fish {
     constructor({x, y, dx, dy, size}) {
@@ -14,7 +14,7 @@ export default class Fish {
     }
 
     draw(ctx) {
-        const image = this.directionX < 0 ? SPACESHIP_LEFT : SPACESHIP_RIGHT
+        const image = this.directionX < 0 ? FISH_LEFT : FISH_RIGHT
         ctx.drawImage(image, this.x, this.y, this.size, this.size)
     }
     

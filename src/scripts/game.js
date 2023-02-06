@@ -4,27 +4,13 @@ import Hook from "./hook";
 const BIG_FISH = 70; //speed = slow 
 const SMALL_FISH = 45; //speed = faster
 
-// const fishArray = [];
 export default class Game {
     constructor(canvas) {
         this.ctx = canvas.getContext("2d");
         this.dimensions = { width: canvas.width, height: canvas.height };
         this.canvas = canvas;
         this.hook = new Hook(canvas.width / 2, 0, 0, 3, "black")
-        this.fishes = [
-            // new Fish({ x: 0, y: Math.random() * canvas.height, dx: 3, dy: 0, size: BIG_FISH }),
-            // // x, y, direction\X, directionY, size, color 
-            // new Fish({ x: 0, y: Math.random() * canvas.height, dx: 4, dy: 0, size: BIG_FISH }),
-            // new Fish({ x: 0, y: Math.random() * canvas.height, dx: 2, dy: 0, size: SMALL_FISH }),
-            // new Fish({ x: 0, y: Math.random() * canvas.height, dx: 6, dy: 0, size: BIG_FISH}),
-            // new Fish({ x: 0, y: Math.random() * canvas.height, dx: 4, dy: 0, size: BIG_FISH}),
-
-            // new Fish({ x: canvas.width, y: Math.random() * canvas.height, dx: -3, dy: 0, size: SMALL_FISH}),
-            // new Fish({ x: canvas.width, y: Math.random() * canvas.height, dx: -4, dy: 0, size: BIG_FISH}),
-            // new Fish({ x: canvas.width, y: Math.random() * canvas.height, dx: -5, dy: 0, size: SMALL_FISH}),
-            // new Fish({ x: canvas.width, y: Math.random() * canvas.height, dx: -6, dy: 0, size: BIG_FISH}),
-
-        ]
+        this.fishes = [];
     }
 
     drawFishes() {
@@ -45,16 +31,21 @@ export default class Game {
     }
 
     start() {
-        setInterval(() => this.loadFish(), 1000);
+        // setInterval to keep loading new fishes every second
+        setInterval(() => this.loadFish(), 500);
         this.animate();
     }
 
+    getRandomElement(array) {
+        const randomIndex = Math.floor(Math.random() * arr.length);
+        return arr[randomIndex];
+    }
+
     loadFish() {
-        // setInterval to keep loading new fishes every second
         const sizes = [BIG_FISH, SMALL_FISH]
         const size = sizes[Math.floor(Math.random() * sizes.length)];
 
-        const speeds = [5, 6]
+        const speeds = [6, 7];
         const slowSpeed = 3;
         const speed = speeds[Math.floor(Math.random() * speeds.length)];
 
@@ -81,6 +72,6 @@ export default class Game {
 
         this.fishes.push(new Fish(fishParams))
     }
-};
+}
 
 // bigFish = slow speed, randomize starting
