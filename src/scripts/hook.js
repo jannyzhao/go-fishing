@@ -21,7 +21,7 @@ export default class Hook {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true);
     
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "lightblue";
         ctx.fill();
         ctx.lineWidth = 1;
         ctx.stroke();
@@ -31,7 +31,8 @@ export default class Hook {
     update() {
         this.x += this.directionX;
         this.y += this.directionY;
-        if (this.y >= this.canvasHeight) {
+
+        if (this.y >= this.canvasHeight || this.y === 0) {
             this.directionY = -this.directionY;
         }
     }

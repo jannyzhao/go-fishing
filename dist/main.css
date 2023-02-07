@@ -2,7 +2,8 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
 #gameBox {
-  border: 2px solid rgb(4, 62, 96);
+  border: 5px black;
+  border-style: solid;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -14,4 +15,11 @@
 body {
   background-image: -webkit-linear-gradient(top, lightblue, rgb(43, 100, 165));
   height: 100vh;
+}
+
+#penguin {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  left: 30%;
 }

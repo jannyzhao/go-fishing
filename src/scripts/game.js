@@ -1,27 +1,18 @@
 import Fish from "./fish";
 import Hook from "./hook";
 
-const BIG_FISH = 70; //speed = slow 
-const SMALL_FISH = 45; //speed = faster
+const BIG_FISH = 75; //speed = slow 
+const SMALL_FISH = 50; //speed = faster
+// const GOLDEN_FISH = 30; //speed = fastest
 
 export default class Game {
     constructor(canvas) {
         this.ctx = canvas.getContext("2d");
         this.dimensions = { width: canvas.width, height: canvas.height };
         this.canvas = canvas;
-        this.hook = new Hook(canvas.width / 2, 0, 0, 5, "black", canvas.height)
-        // Using keydown
-        document.addEventListener("keydown", e => {
-            if (e.code === "Space") {
-                this.hook.directionY = 5; // 5 is the speed, should match directionY
-            }
-        });
-        // Using click
-        // document.addEventListener("click", event => {
-        //     this.hook.directionY = 5;
-        // });
-         
+        this.hook = new Hook(canvas.width / 3, 0, 0, 5, "black", canvas.height)
         this.fishes = [];
+        this.score = 0;
     }
 
     drawFishes() {
@@ -32,28 +23,60 @@ export default class Game {
         this.hook.draw(this.ctx);
     }
 
+    scoreDisplay() {
+        // Display the score
+        this.ctx.beginPath();
+        this.ctx.createLinearGradient(0, 0, 200, 0);
+        this.ctx.fillStyle = "black";
+        this.ctx.font = "bold 30px Arial";
+        this.ctx.stroke();
+        // this.ctx.shadowColor = "black";
+        // this.ctx.shadowBlur = 10;
+        this.ctx.fillText(`SCORE: ${this.score}`, this.canvas.width - 500, this.canvas.height / 15);
+        this.ctx.closePath();
+    }
+
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
+        this.scoreDisplay();
         this.drawFishes();
         this.fishes.forEach(fish => fish.update());
         this.drawHook();
         this.hook.update();
+        this.fishHookCollide();
         requestAnimationFrame(() => this.animate());
     }
 
+    fishHookCollide() {
+        this.fishes.forEach((fish) => {
+            const dx = this.hook.x - fish.x;
+            const dy = this.hook.y - fish.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const isColliding = distance < this.hook.radius + (fish.size / 2);
+
+            if (isColliding) {
+                if (fish.size === BIG_FISH) {
+                    this.score += 5;
+                } else if (fish.size === SMALL_FISH) {
+                    this.score += 10;
+                }
+                this.fishes = this.fishes.filter(f => f !== fish);
+                this.scoreDisplay();
+            }
+        });
+    }
+
     start() {
+        // Using keydown
+        document.addEventListener("keydown", e => {
+            if (e.code === "Space") {
+                this.hook.directionY = 5; // 5 is the speed, should match directionY
+            }
+        });  
+
         // setInterval to keep loading new fishes every second
         setInterval(() => this.loadFish(), 500);
         this.animate();
-    }
-
-    getRandomElement(array) {
-        const randomIndex = Math.floor(Math.random() * arr.length);
-        return arr[randomIndex];
-    }
-
-    moveHook() {
-
     }
 
     loadFish() {
@@ -87,6 +110,5 @@ export default class Game {
 
         this.fishes.push(new Fish(fishParams))
     }
+    
 }
-
-// bigFish = slow speed, randomize starting

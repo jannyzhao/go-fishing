@@ -4,6 +4,9 @@ FISH_LEFT.src = "./assets/spaceship-left.png"
 const FISH_RIGHT = new Image();
 FISH_RIGHT.src = "./assets/spaceship-right.png"
 
+const FISH_GOLDEN = new Image();
+FISH_GOLDEN.src = "./assets/ufo.png"
+
 export default class Fish {
     constructor({x, y, dx, dy, size}) {
         this.x = x;
@@ -14,7 +17,7 @@ export default class Fish {
     }
 
     draw(ctx) {
-        const image = this.directionX < 0 ? FISH_LEFT : FISH_RIGHT
+        const image = this.directionX < 0 ? FISH_LEFT : FISH_RIGHT 
         ctx.drawImage(image, this.x, this.y, this.size, this.size)
     }
     
@@ -23,3 +26,4 @@ export default class Fish {
         this.y += this.directionY; 
     }
 }
+
