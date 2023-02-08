@@ -1,5 +1,6 @@
 import Fish from "./fish";
 import Hook from "./hook";
+import StartGame from "./start_game";
 
 const BIG_FISH = 50; //speed = slow 
 const SMALL_FISH = 30; //speed = faster
@@ -10,14 +11,11 @@ export default class Game {
         this.ctx = canvas.getContext("2d");
         this.dimensions = { width: canvas.width, height: canvas.height };
         this.canvas = canvas;
-        this.hook = new Hook(canvas.width / 3, 0, 0, 5, "black", canvas.height)
+        this.hook = new Hook(canvas.width / 3, 0, 0, 6, "black", canvas.height)
         this.fishes = [];
         this.score = 0;
+        this.startgame = new StartGame(20, 20, 250);
     }
-
-    // toggleScreen(id, toggle) {
-    //     const ele = document
-    // }
 
     drawFishes() {
         this.fishes.forEach(fish => fish.draw(this.ctx));
@@ -25,6 +23,10 @@ export default class Game {
 
     drawHook() {
         this.hook.draw(this.ctx);
+    }
+
+    drawStartGame() {
+        this.startgame.draw(this.ctx);
     }
 
     scoreDisplay() {
@@ -36,7 +38,7 @@ export default class Game {
         this.ctx.stroke();
         // this.ctx.shadowColor = "black";
         // this.ctx.shadowBlur = 10;
-        this.ctx.fillText(`FISH: ${this.score}`, this.canvas.width / 30, this.canvas.height / 15);
+        this.ctx.fillText(`SCORE: ${this.score}`, this.canvas.width / 30, this.canvas.height / 15);
         this.ctx.closePath();
     }
 
@@ -49,6 +51,7 @@ export default class Game {
         this.hook.update();
         this.fishHookCollide();
         requestAnimationFrame(() => this.animate());
+        
     }
 
     fishHookCollide() {
@@ -76,10 +79,8 @@ export default class Game {
         // this.ctx.beginPath();
         // this.ctx.roundRect(450, 250, 100, 50, [40])
         // this.ctx.stroke();
-        this.ctx.font = "25px Comic Sans MS", "Comic Sans";
-        this.ctx.stroke();
-        this.ctx.fillText(`Press ENTER to START GAME`, 350, 250);
-        this.ctx.closePath();
+        this.drawStartGame();
+        // this.ctx.closePath();
         // Add event listener for keydown Enter to call startGame()
 
         document.addEventListener("keydown", e => {
@@ -92,7 +93,7 @@ export default class Game {
     startGame() {
         document.addEventListener("keydown", e => {
             if (e.code === "Space") {
-                this.hook.directionY = 5; // 5 is the speed, should match directionY
+                this.hook.directionY = 6; // 5 is the speed, should match directionY
             }
         });
 
