@@ -7,8 +7,8 @@ body {
 
 #gameBox {
   background-image: -webkit-linear-gradient(top, lightblue, rgb(43, 100, 165));
-  border: 2px black;
-  border-style: solid;
+  border: 2px black solid;
+  border-radius: 20px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -33,5 +33,16 @@ text {
   font-family: "Comic Sans MS", cursive;
   font-size: 45px;
   margin-left: 50px;
+  margin-top: 10px;
+}
+
+#footerContainer {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#links {
+  margin-left: 900px;
   margin-top: 10px;
 }

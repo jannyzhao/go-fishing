@@ -1,6 +1,7 @@
 import Fish from "./fish";
 import Hook from "./hook";
 import StartGame from "./start_game";
+import EndGame from "./end_game";
 
 const BIG_FISH = 50; //speed = slow 
 const SMALL_FISH = 30; //speed = faster
@@ -15,6 +16,8 @@ export default class Game {
         this.fishes = [];
         this.score = 0;
         this.startgame = new StartGame(20, 20, 250);
+        this.startTimer = 30;
+        this.endgame = new EndGame(20, 20, 250);
     }
 
     drawFishes() {
@@ -29,15 +32,25 @@ export default class Game {
         this.startgame.draw(this.ctx);
     }
 
-    scoreDisplay() {
-        // Display the score
+    drawEndGame() {
+        this.endgame.draw(this.ctx);
+    }
+
+    timerDisplay() {
         this.ctx.beginPath();
-        this.ctx.createLinearGradient(0, 0, 200, 0);
         this.ctx.fillStyle = "black";
         this.ctx.font = "25px Comic Sans MS", "Comic Sans";
         this.ctx.stroke();
-        // this.ctx.shadowColor = "black";
-        // this.ctx.shadowBlur = 10;
+        this.ctx.fillText(`TIME LEFT: ${this.startTimer}`, this.canvas.width / 30, this.canvas.height / 8);
+        this.ctx.closePath();
+    }
+
+    scoreDisplay() {
+        // Display the score
+        this.ctx.beginPath();
+        this.ctx.fillStyle = "black";
+        this.ctx.font = "25px Comic Sans MS", "Comic Sans";
+        this.ctx.stroke();
         this.ctx.fillText(`SCORE: ${this.score}`, this.canvas.width / 30, this.canvas.height / 15);
         this.ctx.closePath();
     }
@@ -45,6 +58,7 @@ export default class Game {
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
         this.scoreDisplay();
+        this.timerDisplay();
         this.drawFishes();
         this.fishes.forEach(fish => fish.update());
         this.drawHook();
@@ -74,21 +88,23 @@ export default class Game {
     }
 
     start() {
-        // Add a button.
-        // this.ctx.strokeStyle = "white"
-        // this.ctx.beginPath();
-        // this.ctx.roundRect(450, 250, 100, 50, [40])
-        // this.ctx.stroke();
         this.drawStartGame();
-        // this.ctx.closePath();
-        // Add event listener for keydown Enter to call startGame()
-
         document.addEventListener("keydown", e => {
             if (e.code === "Enter") {
                 this.startGame()
             }
         });
     }
+
+    // end() {
+    //     this.drawEndGame();
+    //     cancelAnimationFrame(this.animate);
+    //     document.addEventListener("keydown", e => {
+    //         if (e.code === "Enter") {
+    //             location.reload();
+    //         }
+    //     });
+    // }
 
     startGame() {
         document.addEventListener("keydown", e => {
@@ -98,6 +114,13 @@ export default class Game {
         });
 
         setInterval(() => this.loadFish(), 500);
+        setInterval(() => {
+            this.startTimer--;
+            if (this.startTimer === 0) {
+                clearInterval(this.startTimer);
+                this.end();
+            }
+        }, 1000);
         this.animate();
     }
 

@@ -1,7 +1,7 @@
 const HAPPY_PENGUIN = new Image();
 HAPPY_PENGUIN.src = "./assets/happy_penguin.png"
 
-const SLEEPY_PENGUIN = new Image(60, 45);
+const SLEEPY_PENGUIN = new Image();
 SLEEPY_PENGUIN.src = "./assets/sleepy_penguin.png"
 
 const GONE_FISHING_PENGUIN = new Image();
@@ -19,7 +19,9 @@ export default class StartGame {
         ctx.fillStyle = "black";
         ctx.font = "25px Comic Sans MS", "Comic Sans";
         ctx.stroke();
-        ctx.fillText(`Press ENTER to START GAME`, 325, 250);
+        ctx.fillText(`Press ENTER to START GAME`, 325, 225);
+        ctx.font = "20px Comic Sans MS", "Comic Sans";
+        ctx.fillText(`INSTRUCTIONS: Use the SPACEBAR to lower the hook and catch the fish`, 150, 275)
         ctx.closePath();
         SLEEPY_PENGUIN.onload = () => {
             ctx.drawImage(SLEEPY_PENGUIN, 0, 300, 250, 250)

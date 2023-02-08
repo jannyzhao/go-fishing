@@ -1,3 +1,6 @@
+const HOOK_IMAGE = new Image();
+HOOK_IMAGE.src = './assets/fish-hook.png';
+
 export default class Hook {
     constructor(x, y, dx, dy, color, canvasHeight) {
         this.x = x;
@@ -10,7 +13,6 @@ export default class Hook {
     }
 
     draw(ctx) {
-        
         ctx.beginPath();
         ctx.strokeStyle = this.color;
         ctx.lineWidth = 1;
@@ -18,14 +20,7 @@ export default class Hook {
         ctx.lineTo(this.x, this.y);
         ctx.stroke();
 
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true);
-    
-        ctx.fillStyle = "lightblue";
-        ctx.fill();
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.closePath();
+        ctx.drawImage(HOOK_IMAGE, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
     }
 
     update() {
@@ -36,5 +31,4 @@ export default class Hook {
             this.directionY = -this.directionY;
         }
     }
-
 }
