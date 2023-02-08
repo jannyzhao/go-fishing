@@ -1,22 +1,44 @@
-  #gameBox {
-      border: 5px black;
-      border-style: solid;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 1000px;
-      height: 600px;
-  }
+body {
+  background-color: papayawhip;
+}
 
-  body {
-      background-image: -webkit-linear-gradient(top, lightblue, rgb(43, 100, 165));
-      height: 100vh;
-    // background-image: url('/../assets/vecteezy_underwater-ocean-background_6510172.jpg');
-  }
+#gameBox {
+  background-image: -webkit-linear-gradient(top, lightblue, rgb(43, 100, 165));
+  border: 2px black;
+  border-style: solid;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 550px;
+}
 
-  #penguin {
-    width: 200px;
-    height: 200px;
-    position: relative; left: 30%
-  }
+// #penguin {
+//   width: 250px;
+//   height: 250px;
+//   float: left;
+//   margin: 0 0 0 15px;
+//   position: absolute;
+//   left: 400px;
+//   top: -20px;
+// }
+
+#penguinContainer {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#penguin {
+  margin-left: 150px;
+  margin-bottom: -70px;
+  width: 250px;
+  height: 250px;
+}
+
+text {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 45px;
+  margin-left: 50px;
+  margin-top: 10px;
+}

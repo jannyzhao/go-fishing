@@ -1,8 +1,8 @@
 import Fish from "./fish";
 import Hook from "./hook";
 
-const BIG_FISH = 75; //speed = slow 
-const SMALL_FISH = 50; //speed = faster
+const BIG_FISH = 50; //speed = slow 
+const SMALL_FISH = 30; //speed = faster
 // const GOLDEN_FISH = 30; //speed = fastest
 
 export default class Game {
@@ -14,6 +14,10 @@ export default class Game {
         this.fishes = [];
         this.score = 0;
     }
+
+    // toggleScreen(id, toggle) {
+    //     const ele = document
+    // }
 
     drawFishes() {
         this.fishes.forEach(fish => fish.draw(this.ctx));
@@ -28,11 +32,11 @@ export default class Game {
         this.ctx.beginPath();
         this.ctx.createLinearGradient(0, 0, 200, 0);
         this.ctx.fillStyle = "black";
-        this.ctx.font = "bold 30px Arial";
+        this.ctx.font = "25px Comic Sans MS", "Comic Sans";
         this.ctx.stroke();
         // this.ctx.shadowColor = "black";
         // this.ctx.shadowBlur = 10;
-        this.ctx.fillText(`SCORE: ${this.score}`, this.canvas.width - 500, this.canvas.height / 15);
+        this.ctx.fillText(`FISH: ${this.score}`, this.canvas.width / 30, this.canvas.height / 15);
         this.ctx.closePath();
     }
 
@@ -52,7 +56,7 @@ export default class Game {
             const dx = this.hook.x - fish.x;
             const dy = this.hook.y - fish.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            const isColliding = distance < this.hook.radius + (fish.size / 2);
+            const isColliding = distance < this.hook.radius + (fish.size);
 
             if (isColliding) {
                 if (fish.size === BIG_FISH) {
@@ -67,14 +71,31 @@ export default class Game {
     }
 
     start() {
-        // Using keydown
+        // Add a button.
+        // this.ctx.strokeStyle = "white"
+        // this.ctx.beginPath();
+        // this.ctx.roundRect(450, 250, 100, 50, [40])
+        // this.ctx.stroke();
+        this.ctx.font = "25px Comic Sans MS", "Comic Sans";
+        this.ctx.stroke();
+        this.ctx.fillText(`Press ENTER to START GAME`, 350, 250);
+        this.ctx.closePath();
+        // Add event listener for keydown Enter to call startGame()
+
+        document.addEventListener("keydown", e => {
+            if (e.code === "Enter") {
+                this.startGame()
+            }
+        });
+    }
+
+    startGame() {
         document.addEventListener("keydown", e => {
             if (e.code === "Space") {
                 this.hook.directionY = 5; // 5 is the speed, should match directionY
             }
-        });  
+        });
 
-        // setInterval to keep loading new fishes every second
         setInterval(() => this.loadFish(), 500);
         this.animate();
     }

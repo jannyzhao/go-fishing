@@ -8,9 +8,15 @@
     <title>Go Fishing</title>
 </head>
 <body>
-    <canvas id="gameBox" width="1000" height="600"></canvas>
 
-    <img id="penguin" src="./assets/penguin.png">
+    <canvas id="canvas" style="display: none;"></canvas>
+    <div>
+        <div id="penguinContainer">
+            <img id="penguin" src="./assets/penguin_fishing.png">
+            <!-- <text>LET'S GO FISHING!</text> -->
+        </div>
+        <canvas id="gameBox" width="1000" height="600"></canvas>
+    </div>
     <script src="./dist/main.js"></script>
 </body>
 </html>
