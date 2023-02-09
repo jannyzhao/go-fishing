@@ -2,11 +2,8 @@ const FULL_PENGUIN = new Image();
 FULL_PENGUIN.src = "./assets/full_penguin.png"
 
 export default class EndGame {
-    constructor(x, y, size) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.score = 0;
+    constructor(score) {
+        this.score = score;
     }
 
     draw(ctx) {

@@ -18,9 +18,8 @@ export default class Game {
         this.fishes = [];
         this.score = 0;
         this.startgame = new StartGame(20, 20, 250);
-        this.startTimer = 30;
+        this.startTimer = 5;
         // this.timer = new Timer(30);
-        this.endgame = new EndGame(20, 20, 250);
         this.bubbles = new Bubbles(canvas.width / 3, canvas.height / 3, 0, 0, 50) 
     }
 
@@ -76,7 +75,7 @@ export default class Game {
         this.drawHook();
         this.hook.update();
         this.fishHookCollide();
-        requestAnimationFrame(() => this.animate());
+        this.raf = requestAnimationFrame(() => this.animate());
         
     }
 
@@ -111,15 +110,16 @@ export default class Game {
     }
 
     end() {
+        this.endgame = new EndGame(this.score);
         this.drawEndGame();
-        cancelAnimationFrame(this.animate);
-        document.removeEventListener("keydown", this.spaceListener);
-        clearInterval(this.startTimer);
+        cancelAnimationFrame(this.raf);
+        // document.removeEventListener("keydown", this.spaceListener);
+        // clearInterval(this.startTimer);
         document.addEventListener("keydown", this.replayListener);
     }
 
     replayListener(e) {
-        if (e.code === "KeyX") {
+        if (e.code === "Enter") {
             location.reload();
         }
     }
@@ -133,11 +133,11 @@ export default class Game {
 
         setInterval(() => this.loadFish(), 500);
         this.animate();
-        setInterval(() => {
+        let time = setInterval(() => {
             this.startTimer--;
-            if (this.startTimer <= 0) {
-                clearInterval(this.startTimer);
+            if (this.startTimer === -1) {
                 this.end();
+                clearInterval(time);
             }
         }, 1000);
     }
