@@ -10,5 +10,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const game = new Game(canvas);
     game.start();
-    game.end();
+    // game.end();
 });

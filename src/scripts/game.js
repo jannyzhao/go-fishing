@@ -2,6 +2,8 @@ import Fish from "./fish";
 import Hook from "./hook";
 import StartGame from "./start_game";
 import EndGame from "./end_game";
+import Bubbles from "./bubbles";
+// import Timer from "./timer";
 
 const BIG_FISH = 50; //speed = slow 
 const SMALL_FISH = 30; //speed = faster
@@ -12,12 +14,18 @@ export default class Game {
         this.ctx = canvas.getContext("2d");
         this.dimensions = { width: canvas.width, height: canvas.height };
         this.canvas = canvas;
-        this.hook = new Hook(canvas.width / 3, 0, 0, 6, "black", canvas.height)
+        this.hook = new Hook(canvas.width / 3, 0, 0, 0, "black", canvas.height)
         this.fishes = [];
         this.score = 0;
         this.startgame = new StartGame(20, 20, 250);
         this.startTimer = 30;
+        // this.timer = new Timer(30);
         this.endgame = new EndGame(20, 20, 250);
+        this.bubbles = new Bubbles(canvas.width / 3, canvas.height / 3, 0, 0, 50) 
+    }
+
+    drawBubbles() {
+        this.bubbles.draw(this.ctx);
     }
 
     drawFishes() {
@@ -42,6 +50,8 @@ export default class Game {
         this.ctx.font = "25px Comic Sans MS", "Comic Sans";
         this.ctx.stroke();
         this.ctx.fillText(`TIME LEFT: ${this.startTimer}`, this.canvas.width / 30, this.canvas.height / 8);
+        // this.ctx.fillText(`TIME LEFT: ${Math.floor(this.timer.timeRemaining / 60)}`, this.canvas.width / 30, this.canvas.height / 8);
+
         this.ctx.closePath();
     }
 
@@ -60,6 +70,8 @@ export default class Game {
         this.scoreDisplay();
         this.timerDisplay();
         this.drawFishes();
+        this.bubbles.update();
+        this.drawBubbles();
         this.fishes.forEach(fish => fish.update());
         this.drawHook();
         this.hook.update();
@@ -78,8 +90,10 @@ export default class Game {
             if (isColliding) {
                 if (fish.size === BIG_FISH) {
                     this.score += 5;
+                    this.hook.directionY = -6;
                 } else if (fish.size === SMALL_FISH) {
                     this.score += 10;
+                    this.hook.directionY = -6;
                 }
                 this.fishes = this.fishes.filter(f => f !== fish);
                 this.scoreDisplay();
@@ -96,15 +110,19 @@ export default class Game {
         });
     }
 
-    // end() {
-    //     this.drawEndGame();
-    //     cancelAnimationFrame(this.animate);
-    //     document.addEventListener("keydown", e => {
-    //         if (e.code === "Enter") {
-    //             location.reload();
-    //         }
-    //     });
-    // }
+    end() {
+        this.drawEndGame();
+        cancelAnimationFrame(this.animate);
+        document.removeEventListener("keydown", this.spaceListener);
+        clearInterval(this.startTimer);
+        document.addEventListener("keydown", this.replayListener);
+    }
+
+    replayListener(e) {
+        if (e.code === "KeyX") {
+            location.reload();
+        }
+    }
 
     startGame() {
         document.addEventListener("keydown", e => {
@@ -114,14 +132,14 @@ export default class Game {
         });
 
         setInterval(() => this.loadFish(), 500);
+        this.animate();
         setInterval(() => {
             this.startTimer--;
-            if (this.startTimer === 0) {
+            if (this.startTimer <= 0) {
                 clearInterval(this.startTimer);
                 this.end();
             }
         }, 1000);
-        this.animate();
     }
 
     loadFish() {

@@ -21,7 +21,10 @@ export default class StartGame {
         ctx.stroke();
         ctx.fillText(`Press ENTER to START GAME`, 325, 225);
         ctx.font = "20px Comic Sans MS", "Comic Sans";
-        ctx.fillText(`INSTRUCTIONS: Use the SPACEBAR to lower the hook and catch the fish`, 150, 275)
+        ctx.fillText(`INSTRUCTIONS: Use the SPACEBAR to lower the hook and catch the fish`, 150, 270)
+        ctx.fillStyle = "black";
+        ctx.font = "15px Comic Sans MS", "Comic Sans";
+        ctx.fillText(`Created by: Janny Zhao`, 410, 550)
         ctx.closePath();
         SLEEPY_PENGUIN.onload = () => {
             ctx.drawImage(SLEEPY_PENGUIN, 0, 300, 250, 250)
