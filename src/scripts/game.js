@@ -18,7 +18,7 @@ export default class Game {
         this.fishes = [];
         this.score = 0;
         this.startgame = new StartGame(20, 20, 250);
-        this.startTimer = 5;
+        this.startTimer = 20;
         // this.timer = new Timer(30);
         this.bubbles = new Bubbles(canvas.width / 3, canvas.height / 3, 0, 0, 50) 
     }
