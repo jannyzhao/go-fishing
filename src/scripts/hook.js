@@ -27,7 +27,7 @@ export default class Hook {
         this.x += this.directionX;
         this.y += this.directionY;
 
-        if (this.y >= this.canvasHeight) {
+        if (this.y >= this.canvasHeight - 25) {
             this.directionY = -this.directionY;
         } else if (this.y === 0){
             this.directionY = 0;

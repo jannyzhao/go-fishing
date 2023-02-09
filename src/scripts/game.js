@@ -155,7 +155,7 @@ export default class Game {
         
         const fishParams = {
             x: direction,
-            y: Math.random() * this.canvas.height, 
+            y: Math.random() * this.canvas.height + 75 , 
             dx: 0, 
             dy: 0, 
             size: size
