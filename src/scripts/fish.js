@@ -4,9 +4,6 @@ FISH_LEFT.src = "./assets/fish-left.png"
 const FISH_RIGHT = new Image();
 FISH_RIGHT.src = "./assets/fish-right.png"
 
-// const FISH_GOLDEN = new Image();
-// FISH_GOLDEN.src = "./assets/ufo.png"
-
 export default class Fish {
     constructor({x, y, dx, dy, size}) {
         this.x = x;

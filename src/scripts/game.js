@@ -3,11 +3,9 @@ import Hook from "./hook";
 import StartGame from "./start_game";
 import EndGame from "./end_game";
 import Bubbles from "./bubbles";
-// import Timer from "./timer";
 
-const BIG_FISH = 50; //speed = slow 
-const SMALL_FISH = 30; //speed = faster
-// const GOLDEN_FISH = 30; //speed = fastest
+const BIG_FISH = 50; 
+const SMALL_FISH = 30;
 
 export default class Game {
     constructor(canvas) {
@@ -49,8 +47,6 @@ export default class Game {
         this.ctx.font = "25px Comic Sans MS", "Comic Sans";
         this.ctx.stroke();
         this.ctx.fillText(`TIME LEFT: ${this.startTimer}`, this.canvas.width / 30, this.canvas.height / 8);
-        // this.ctx.fillText(`TIME LEFT: ${Math.floor(this.timer.timeRemaining / 60)}`, this.canvas.width / 30, this.canvas.height / 8);
-
         this.ctx.closePath();
     }
 
@@ -101,20 +97,20 @@ export default class Game {
     }
 
     start() {
-        this.drawStartGame();
-        document.addEventListener("keydown", e => {
+        const onKeyDown = (e) => {
             if (e.code === "Enter") {
                 this.startGame()
-            }
-        });
+                document.removeEventListener("keydown", onKeyDown);
+        }}
+        this.drawStartGame();
+        document.addEventListener("keydown", onKeyDown);
     }
+
 
     end() {
         this.endgame = new EndGame(this.score);
         this.drawEndGame();
         cancelAnimationFrame(this.raf);
-        // document.removeEventListener("keydown", this.spaceListener);
-        // clearInterval(this.startTimer);
         document.addEventListener("keydown", this.replayListener);
     }
 

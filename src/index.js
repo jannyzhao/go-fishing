@@ -1,6 +1,5 @@
 import Game from "./scripts/game";
 
-//adding DOMContentLoaded to ensure canvas element is loaded before accessing it
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("gameBox");
     const ctx = canvas.getContext("2d");

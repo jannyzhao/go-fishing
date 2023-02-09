@@ -11,7 +11,7 @@ export default class EndGame {
         ctx.fillStyle = "black";
         ctx.font = "20px Comic Sans MS", "Comic Sans";
         ctx.stroke();
-        ctx.fillText(`You caught ${this.score} fish! Press ENTER to PLAY AGAIN`, 250, 250);
+        ctx.fillText(`You scored ${this.score} points! Press ENTER to PLAY AGAIN`, 250, 250);
         ctx.closePath();
         FULL_PENGUIN.onload = () => {
             ctx.drawImage(FULL_PENGUIN, 375, 275, 250, 250)
